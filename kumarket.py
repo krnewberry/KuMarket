@@ -1,18 +1,16 @@
 import requests
 import pandas as pd
 
-# GET all market-pairs on Kucoin via /api/v1/symbols
-
 # KUCOIN API
 api_url = "https://api.kucoin.com"
 csv_name = "Kucoin_Market-Pairs"
 
 # API CALL
-data = requests.get(f"{api_url}/api/v1/symbols",
+KuMarketData = requests.get(f"{api_url}/api/v1/symbols",
 	headers = {"content-type":"application/json"})
-    
-# CSV EXPORT   
-df = pd.DataFrame(data.json()["data"],
+
+# DATA FRAME 
+df = pd.DataFrame(KuMarketData.json()["data"],
     columns = ['symbol',
     'name',
     'baseCurrency',
@@ -30,6 +28,9 @@ df = pd.DataFrame(data.json()["data"],
     'isMarginEnabled',
     'priceLimitRate'])
 
-# df = df[["symbol","name","market"]]
+# CSV - INCLUDE ONLY:
+df = df[["symbol","name","market"]]
+
+# CSV - EXPORT
 df.sort_values(by='symbol', inplace=True)
 df.to_csv(csv_name+'.csv', header=True, index=False)
