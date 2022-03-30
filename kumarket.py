@@ -31,8 +31,13 @@ df = pd.DataFrame(KuMarketData.json()["data"],
 # CSV - INCLUDE THESE COLUMNS ONLY:
 df = df[["symbol", "quoteCurrency", "market"]]
 
-# CSV - EXPORT
+# CSV - EXCLUDE EVERY quoteCurrency EXCEPT:
+df = df[df['quoteCurrency'].isin(['BTC','ETH'])]
+
+# CSV - ORDER ROWS BY
 df.sort_values(by='quoteCurrency', inplace=True)
+
+# CSV - EXPORT
 df.to_csv(csv_name+'.csv', header=True, index=False)
 
 print("Success...")
