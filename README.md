@@ -1,1 +1,1 @@
-empty
+GET MARKET PAIRINGS FROM KUCOIN via /api/v1/symbols
