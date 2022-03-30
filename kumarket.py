@@ -28,9 +28,11 @@ df = pd.DataFrame(KuMarketData.json()["data"],
     'isMarginEnabled',
     'priceLimitRate'])
 
-# CSV - INCLUDE ONLY:
-df = df[["symbol","name","market"]]
+# CSV - INCLUDE THESE COLUMNS ONLY:
+df = df[["symbol", "quoteCurrency", "market"]]
 
 # CSV - EXPORT
-df.sort_values(by='symbol', inplace=True)
+df.sort_values(by='quoteCurrency', inplace=True)
 df.to_csv(csv_name+'.csv', header=True, index=False)
+
+print("Success...")
