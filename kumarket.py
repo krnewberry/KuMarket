@@ -1,9 +1,7 @@
 import requests
 import pandas as pd
-import time
-from datetime import datetime, timezone
 
-# GET all market pairs on Kucoin via /api/v1/symbols
+# GET all market-pairs on Kucoin via /api/v1/symbols
 
 # KUCOIN API
 api_url = "https://api.kucoin.com"
