@@ -11,22 +11,22 @@ KuMarketData = requests.get(f"{api_url}/api/v1/symbols",
 
 # DATA FRAME 
 df = pd.DataFrame(KuMarketData.json()["data"],
-    columns = ['symbol',
-    'name',
-    'baseCurrency',
-    'quoteCurrency',
-    'market',
-    'baseMinSize',
-    'quoteMinSize',
-    'baseMaxSize',
-    'quoteMaxSize',
-    'baseIncrement',
-    'quoteIncrement',
-    'priceIncrement',
-    'feeCurrency',
-    'enableTrading',
-    'isMarginEnabled',
-    'priceLimitRate'])
+    columns = ['symbol', # unique code of a symbol, it would not change after renaming
+    'name', # Name of trading pairs, it would change after renaming
+    'baseCurrency', # Base currency,e.g. BTC.
+    'quoteCurrency', # Quote currency,e.g. USDT.
+    'market', # The trading market.
+    'baseMinSize', # The minimum order quantity requried to place an order.
+    'quoteMinSize', # The minimum order funds required to place a market order.
+    'baseMaxSize', # The maximum order size required to place an order.
+    'quoteMaxSize', # The maximum order funds required to place a market order.
+    'baseIncrement', # The increment of the order size. The value shall be a positive multiple of the baseIncrement.
+    'quoteIncrement', # The increment of the funds required to place a market order. The value shall be a positive multiple of the quoteIncrement.
+    'priceIncrement', # The increment of the price required to place a limit order. The value shall be a positive multiple of the priceIncrement.
+    'feeCurrency', # The currency of charged fees.
+    'enableTrading', # Available for transaction or not.
+    'isMarginEnabled', # Available for margin or not.
+    'priceLimitRate']) # Threshold for price portection
 
 # CSV - INCLUDE THESE COLUMNS ONLY:
 df = df[["symbol", "quoteCurrency", "market"]]
